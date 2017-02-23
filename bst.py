@@ -5,20 +5,20 @@
 #   WORST: (access, search, insertion, deletion):   O(n)
 #
 #   In ordered list if we are clever with our comparisons. 
-#   In the sequential search, when we compare against the first item.
+#   In the sequential search, when we compare against the first node.
 #    
-#   of all this, a binary search will start by examining the middle item.
+#   of all this, a binary search will start by examining the middle node.
 #   in some cases we can edit this to a set it at random pivot, if pivot is equal
 #   to the number we are looking on list, we are done. If not we can use the ordered
-#   list to eliminate half of the remaining items.
+#   list to eliminate half of the remaining nodes.
 #
-#   If the item we are searching for is greater than the middle item,
-#   we know that the entire lower half of the list as well as the middle item
-#   can be eliminated from further consideration. The item,
+#   If the node we are searching for is greater than the middle node,
+#   we know that the entire lower half of the list as well as the middle node
+#   can be eliminated from further consideration. The node,
 #   if it is in the list, must be in the upper half.
 #
 #   We can then repeat the process with the upper half.
-#   Start at the middle item and compare it against what we are looking for.
+#   Start at the middle node and compare it against what we are looking for.
 #
 #   EXAMPLE
 #   Suppose you have the following sorted list [3, 5, 6, 8, 11, 12, 14, 15, 17, 18]
@@ -43,7 +43,7 @@
 #   D IS CORRECT since Binary search starts at the midpoint and halves the list each time.
 import os
 
-def bst(list, item):
+def bst(list, node):
 
     first = 0
     last = len(list)-1
@@ -51,10 +51,10 @@ def bst(list, item):
 
     while first<=last and not found:
         midpoint = (first + last)//2
-        if list[midpoint] == item:
+        if list[midpoint] == node:
             found = True
         else:
-            if item < list[midpoint]:
+            if node < list[midpoint]:
                 last = midpoint-1
             else:
                 first = midpoint+1
