@@ -43,14 +43,66 @@
 #   D IS CORRECT since Binary search starts at the midpoint and halves the list each time.
 import os
 
-def bst(list, node):
+# A utility class that represents an individual node in a BST
+class Node:
+    def __init__(self,key):
+        self.left = None
+        self.right = None
+        self.val = key
 
+
+# A utility function to insert a new node with the given key
+def insert(root,node):
+    if root is None:
+        root = node
+    else:
+        if root.val < node.val:
+            if root.right is None:
+                root.right = node
+            else:
+                insert(root.right, node)
+        else:
+            if root.left is None:
+                root.left = node
+            else:
+                insert(root.left, node)
+
+# A utility function to search a given key in BST
+def search(root,key):
+    
+    # Base Cases: root is null or key is present at root
+    if root is None or root.val == key:
+        return root
+    
+    # Key is greater than root's key
+    if root.val < key:
+        return search(root.right,key)
+    
+    # Key is smaller than root's key
+    return search(root.left,key)
+
+# A utility function to do inorder tree traversal
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.val)
+        inorder(root.right)
+
+def search_iteratively(list, node):
+
+    # set the root node and last node
+    # substract 1 to avoid counting null terminator
     first = 0
     last = len(list)-1
     found = False
-
+    
+    #it searches iterative
     while first<=last and not found:
+        
+        #get the floor average pivot midpoint
+        #pivot = midpoint
         midpoint = (first + last)//2
+        
         if list[midpoint] == node:
             found = True
         else:
@@ -60,6 +112,8 @@ def bst(list, node):
                 first = midpoint+1
 
     return found
+
+
 
 def main():
     
@@ -71,12 +125,28 @@ def main():
     print "Original List: "
     print list
     
-    print "\nLooking for a number 3: "
-    print bst(list, 3)
-    print "\nLooking for a number 13: "
-    print bst(list, 13)
-    print "\nLooking for a number 42: "
-    print bst(list, 42)
+    print "\nSearch Iteratively for a number 3: "
+    print search_iteratively(list, 3)
+    print "\nSearch Iteratively for a number 13: "
+    print search_iteratively(list, 13)
+
+# Driver program to test the above functions
+# Let us create the following BST
+#      50
+#    /    \
+#   30     70
+#   / \    / \
+#  20 40  60 80
+r = Node(50)
+insert(r,Node(30))
+insert(r,Node(20))
+insert(r,Node(40))
+insert(r,Node(70))
+insert(r,Node(60))
+insert(r,Node(80))
+
+# Print inoder traversal of the BST
+inorder(r
 
 if __name__ == '__main__': main()
 
