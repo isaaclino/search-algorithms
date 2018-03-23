@@ -1,4 +1,3 @@
-# Assignment 2 -  CS141 - Isaac Lino
 
 import re
 import sys
